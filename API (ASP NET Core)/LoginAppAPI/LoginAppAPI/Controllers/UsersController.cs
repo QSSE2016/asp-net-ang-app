@@ -1,7 +1,5 @@
-﻿using LoginAppAPI.Data;
-using LoginAppAPI.Models;
+﻿using LoginAppAPI.Models;
 using LoginAppAPI.Models.DTOs;
-using LoginAppAPI.Repositories.Implementation;
 using LoginAppAPI.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,6 +39,21 @@ namespace LoginAppAPI.Controllers
 
             // 3. turn it back to a DTO (this time containing only the info we want). In my case i only want the name, so i'm passing the name only without a DTO
             return Ok(payload.Name);
+        }
+
+
+        [HttpGet]
+        public IActionResult GetUsers()
+        {
+            try
+            {
+                var usernames = repo.GetAllUsers();
+                return Ok(usernames);
+            } catch(Exception ex)
+            {
+                System.Console.WriteLine("OOPS: " + ex.Message);
+                return StatusCode(500, "Something happened to the server.");
+            }
         }
     }
 }

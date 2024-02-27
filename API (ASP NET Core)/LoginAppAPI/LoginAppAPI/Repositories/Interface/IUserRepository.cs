@@ -6,5 +6,6 @@ namespace LoginAppAPI.Repositories.Interface
     public interface IUserRepository
     {
         Task<User> CreateAsync(User user);
+        IEnumerable<string> GetAllUsers();
     }
 }

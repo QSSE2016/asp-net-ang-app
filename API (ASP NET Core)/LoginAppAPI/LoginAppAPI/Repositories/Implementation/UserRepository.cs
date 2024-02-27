@@ -1,7 +1,6 @@
 ﻿using LoginAppAPI.Data;
 using LoginAppAPI.Models;
 using LoginAppAPI.Repositories.Interface;
-using System;
 
 namespace LoginAppAPI.Repositories.Implementation
 {
@@ -20,6 +19,13 @@ namespace LoginAppAPI.Repositories.Implementation
             await context.SaveChangesAsync();
 
             return user;
+        }
+
+        // Not making this async, since i have very little users. Though in serious projects
+        // you probably want async functions
+        public IEnumerable<string> GetAllUsers()
+        {
+            return context.Users.ToList().Select(x => x.Name);
         }
     }
 }
