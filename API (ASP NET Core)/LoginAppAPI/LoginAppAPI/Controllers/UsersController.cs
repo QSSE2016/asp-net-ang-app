@@ -1,6 +1,8 @@
 ﻿using LoginAppAPI.Data;
 using LoginAppAPI.Models;
 using LoginAppAPI.Models.DTOs;
+using LoginAppAPI.Repositories.Implementation;
+using LoginAppAPI.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LoginAppAPI.Controllers
@@ -11,8 +13,12 @@ namespace LoginAppAPI.Controllers
     [ApiController]
     public class UsersController : Controller
     {
-        private readonly AppDbContext appDbContext;
-        public UsersController(AppDbContext context) { appDbContext = context; }
+        private readonly IUserRepository repo;
+
+        public UsersController(IUserRepository repo)
+        {
+            this.repo = repo;
+        }
 
 
 
@@ -30,9 +36,8 @@ namespace LoginAppAPI.Controllers
             };
 
 
-            // 2. store it
-            await appDbContext.AddAsync(u);
-            await appDbContext.SaveChangesAsync();
+            // 2. store it (through the repository)
+            await repo.CreateAsync(u);
 
             // 3. turn it back to a DTO (this time containing only the info we want). In my case i only want the name, so i'm passing the name only without a DTO
             return Ok(payload.Name);

@@ -1,4 +1,6 @@
 using LoginAppAPI.Data;
+using LoginAppAPI.Repositories.Implementation;
+using LoginAppAPI.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseConnection"));
 });
+
+// Inject User Repo Service to the project. (really important, dont forget)
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
