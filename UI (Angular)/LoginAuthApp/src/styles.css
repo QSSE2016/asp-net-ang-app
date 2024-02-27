@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+*,*::before,*::after {
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+body {
+    width: 100vw;
+    width: 100dvw;
+    height: 100vh;
+    height: 100dvh;
+    background-color: rgb(30,30,30);
+    overflow: hidden;
+}
