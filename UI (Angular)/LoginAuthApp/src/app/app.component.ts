@@ -13,6 +13,8 @@ export class AppComponent implements OnDestroy {
 
   form: FormGroup
   loginCheckSub?: Subscription
+  loggedIn: boolean = true // yeah i know this is bad practise, i'm just trying to finish this god damn project.
+  currentUsername: string = "timmy"
 
   constructor(private middleman: MiddlemanService) {
     this.form = new FormGroup({
@@ -29,7 +31,9 @@ export class AppComponent implements OnDestroy {
 
     this.loginCheckSub = this.middleman.checkIfUserExists(this.form.value['username'],this.form.value['password']).subscribe({
       next: (value) => {
-        console.log("SUCCESS: ",value)
+        // value = username
+        this.loggedIn = true
+        this.currentUsername = value.toString()
       },
       error: (value) => {
         alert("The credentials you entered do not match any account. Please enter valid credentials")

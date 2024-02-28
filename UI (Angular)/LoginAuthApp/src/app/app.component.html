@@ -1,6 +1,8 @@
-<form class="form-container" [formGroup]="form" (submit)="submit()">
+<form class="form-container" [formGroup]="form" (submit)="submit()" *ngIf="!loggedIn">
     <span> Login </span>
     <input type="text" placeholder="Enter Username" formControlName="username">
     <input type="password" placeholder="Enter Password" formControlName="password">
     <button> Submit </button>
 </form>
+
+<app-main-page *ngIf="loggedIn"></app-main-page>
