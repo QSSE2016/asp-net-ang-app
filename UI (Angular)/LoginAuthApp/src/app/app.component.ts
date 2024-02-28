@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,21 @@ import { FormGroup } from '@angular/forms';
 export class AppComponent {
   title = 'LoginAuthApp';
 
+  form: FormGroup
+
+  constructor() {
+    this.form = new FormGroup({
+      username: new FormControl('',Validators.required),
+      password: new FormControl('',Validators.required)
+    })
+  }
+
   submit() {
-    alert("submitted")
+    if(this.form.invalid) {
+       alert("Please fill all the fields.")
+       return
+    }
+
+    console.log(this.form.value)
   }
 }

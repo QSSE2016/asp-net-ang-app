@@ -1,6 +1,6 @@
-<form class="form-container" (submit)="submit()">
+<form class="form-container" [formGroup]="form" (submit)="submit()">
     <span> Login </span>
-    <input type="text" placeholder="Enter Username">
-    <input type="password" placeholder="Enter Password">
+    <input type="text" placeholder="Enter Username" formControlName="username">
+    <input type="password" placeholder="Enter Password" formControlName="password">
     <button> Submit </button>
 </form>
