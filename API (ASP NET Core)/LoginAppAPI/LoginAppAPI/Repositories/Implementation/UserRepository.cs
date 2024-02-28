@@ -13,8 +13,12 @@ namespace LoginAppAPI.Repositories.Implementation
             this.context = context;
         }
 
-        public async Task<User> CreateAsync(User user)
+        // I'm going to assume different names for every user, but if you want to take that into account, maybe don't use only the username for checking if someone is you lol.
+        public async Task<User?> CreateAsync(User user)
         {
+            if(context.Users.Contains(user))
+                return null;
+
             await context.AddAsync(user);
             await context.SaveChangesAsync();
 

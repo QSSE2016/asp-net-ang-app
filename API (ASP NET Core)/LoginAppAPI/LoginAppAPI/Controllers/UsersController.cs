@@ -35,10 +35,10 @@ namespace LoginAppAPI.Controllers
 
 
             // 2. store it (through the repository)
-            await repo.CreateAsync(u);
+            User? response = await repo.CreateAsync(u);
 
             // 3. turn it back to a DTO (this time containing only the info we want). In my case i only want the name, so i'm passing the name only without a DTO
-            return Ok(payload.Name);
+            return Ok(response == null ? null : payload.Name);
         }
 
 
