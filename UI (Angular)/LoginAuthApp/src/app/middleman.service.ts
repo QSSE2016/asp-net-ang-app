@@ -9,7 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class MiddlemanService {
 
-  apiUrl: string = "http://localhost:4200/api/"
+  port = 7074
+  apiUrl: string = `https://localhost:${this.port}/api/`
   constructor(private http: HttpClient) { }
 
   checkIfUserExists(username:string,password:string) : Observable<Object> {

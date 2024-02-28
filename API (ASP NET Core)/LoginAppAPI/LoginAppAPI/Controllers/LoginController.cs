@@ -20,7 +20,7 @@ namespace LoginAppAPI.Controllers
         public async Task<IActionResult> CheckIfClientCanLogIn(LoginCheckDto loginInfo)
         {
             bool okToLogin = await repo.CanLogin(loginInfo);
-            return !okToLogin ? StatusCode(401,"") : Ok(loginInfo.Username);
+            return !okToLogin ? StatusCode(401,new { Value = ""}) : Ok(new {Value = loginInfo.Username });
         }
     }
 }
