@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
+// Add services to the container.
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+// builder.Services.AddSwaggerGen();
 
 // Connect to database
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -20,15 +20,19 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // Inject User Repo Service to the project. (really important, dont forget)
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+/* NOT NECESSARY I TESTED EVERYTHING
+ * 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+*/
 
 // Avoid CORS bull
 app.UseCors(options =>
