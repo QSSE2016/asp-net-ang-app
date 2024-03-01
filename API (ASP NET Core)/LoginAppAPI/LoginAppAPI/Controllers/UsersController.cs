@@ -59,8 +59,11 @@ namespace LoginAppAPI.Controllers
         [HttpDelete("{*username}")]
         public IActionResult DeleteUser([FromRoute] string username)
         {
+            if (repo.ShouldntDelete())
+                return StatusCode(403, new { message = "You must at least have 1 user after deleting one." });
+
             bool somethingGotDeleted = repo.Delete(username);
-            return somethingGotDeleted ? Ok() : StatusCode(404);
+            return somethingGotDeleted ? Ok() : StatusCode(404, new { message = "The user you entered doesn't exist."});
         }
     }
 }

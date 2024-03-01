@@ -14,6 +14,7 @@ export class MainPageComponent implements OnDestroy {
   users: Observable<string[]> // idk how else to define this. its 
   showUsers: boolean = true
   addUserSub?: Subscription
+  deleteUserSub?: Subscription
 
   constructor(private middleman: MiddlemanService) {
     this.addUserForm = new FormGroup({
@@ -53,13 +54,13 @@ export class MainPageComponent implements OnDestroy {
       return;
     }
 
-    this.middleman.deleteUser(this.deleteUserForm.controls['username'].value).subscribe({
+    this.deleteUserSub = this.middleman.deleteUser(this.deleteUserForm.controls['username'].value).subscribe({
       next: (value) => {
         alert("Succesfully deleted user.")
         this.users = this.middleman.getAllUsers()
       },
       error: (value) => {
-        alert("The user you entered most likely doesn't exist.");
+        alert(value.error.message)
       }
     })
   }
@@ -69,6 +70,7 @@ export class MainPageComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+      this.deleteUserSub?.unsubscribe()
       this.addUserSub?.unsubscribe()
   }
 

@@ -13,7 +13,7 @@ export class AppComponent implements OnDestroy {
 
   form: FormGroup
   loginCheckSub?: Subscription
-  loggedIn: boolean = true // yeah i know this is bad practise, i'm just trying to finish this god damn project.
+  loggedIn: boolean = false // yeah i know this is bad practise, i'm just trying to finish this god damn project.
   currentUsername: string = "timmy"
 
   constructor(private middleman: MiddlemanService) {

@@ -36,11 +36,10 @@
     box-shadow: 0 0 2px 0 white;
     border-radius: .3em;
     padding: 1em 2em;
-    transition: background-color 150ms ease-in-out, transform 150ms ease-in-out;
+    transition: background-color 150ms ease-in-out;
 }
 
 .action-button:hover {
-    transform: scale(1.05);
     background-color: hsl(200,60%,40%);
     cursor: pointer;
 }

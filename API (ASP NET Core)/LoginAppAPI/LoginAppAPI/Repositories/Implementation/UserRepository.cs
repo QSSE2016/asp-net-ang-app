@@ -43,5 +43,10 @@ namespace LoginAppAPI.Repositories.Implementation
         {
             return context.Users.ToList().Select(x => x.Name);
         }
+
+        public bool ShouldntDelete()
+        {
+            return context.Users.Count() == 1;
+        }
     }
 }
