@@ -9,9 +9,8 @@ import { Observable, Subscription, map } from 'rxjs';
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent implements OnDestroy {
-  @Input() username: string = ''
-
   addUserForm: FormGroup
+  deleteUserForm: FormGroup
   users: Observable<string[]> // idk how else to define this. its 
   showUsers: boolean = true
   addUserSub?: Subscription
@@ -23,13 +22,17 @@ export class MainPageComponent implements OnDestroy {
       password: new FormControl('',Validators.required),
     })
 
+    this.deleteUserForm = new FormGroup({
+       username: new FormControl('',Validators.required)
+    })
+
     this.users = this.middleman.getAllUsers()
   }
 
   addUserFormSubmit() {  
     // Yeah i dont have a specific message for email being wrong but whatever
     if(this.addUserForm.invalid) {
-        alert("Form Invalid. All fields must be filled and the email field needs to contain an email")
+        alert("Form Invalid. All fields must be filled and the email field needs to contain an email.")
         return;
     }
 
@@ -44,7 +47,33 @@ export class MainPageComponent implements OnDestroy {
     })
   }
 
+  deleteUserFormSubmit() {
+    if(this.deleteUserForm.invalid) {
+      alert("Please fill the username field.")
+      return;
+    }
+
+    this.middleman.deleteUser(this.deleteUserForm.controls['username'].value).subscribe({
+      next: (value) => {
+        alert("Succesfully deleted user.")
+        this.users = this.middleman.getAllUsers()
+      },
+      error: (value) => {
+        alert("The user you entered most likely doesn't exist.");
+      }
+    })
+  }
+
+  userShowToggle() {
+    this.showUsers = !this.showUsers
+  }
+
   ngOnDestroy(): void {
       this.addUserSub?.unsubscribe()
+  }
+
+
+  get showUsersButtonText() {
+    return this.showUsers ? "Hide Users" : "Show Users"
   }
 }

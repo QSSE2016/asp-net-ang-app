@@ -1,6 +1,6 @@
 <div class="full-scr-wrapper">
     <div class="section" id="SHOW_USERS">
-        <button class="action-button"> Show Users </button>
+        <button class="action-button" (click)="userShowToggle()"> {{showUsersButtonText}} </button>
         <div class="list-wrapper" *ngIf="showUsers">
             <span *ngFor="let user of users | async">{{user}}</span>
         </div>
@@ -16,9 +16,9 @@
     </div>
 
     <div class="section">
-        <button class="action-button"> Show Users </button>
-        <div class="list-wrapper">
-            <span *ngFor="let user of users | async">{{user}}</span>
-        </div>
+        <form [formGroup]="deleteUserForm" (submit)="deleteUserFormSubmit()">
+        <button class="action-button"> Delete A User </button>
+            <input type="text" formControlName="username" placeholder="Username">
+        </form>
     </div>
 </div>

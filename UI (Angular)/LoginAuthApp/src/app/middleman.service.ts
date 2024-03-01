@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -33,6 +33,6 @@ export class MiddlemanService {
   }
 
   deleteUser(username:string) {
-     console.log("deleting user with username: " + username)
+    return this.http.delete(this.apiUrl + `users/${username}`)
   }
 }
