@@ -56,8 +56,8 @@ namespace LoginAppAPI.Controllers
             }
         }
 
-        [HttpDelete]
-        public IActionResult DeleteUser(string username)
+        [HttpDelete("{*username}")]
+        public IActionResult DeleteUser([FromRoute] string username)
         {
             bool somethingGotDeleted = repo.Delete(username);
             return somethingGotDeleted ? Ok() : StatusCode(404);

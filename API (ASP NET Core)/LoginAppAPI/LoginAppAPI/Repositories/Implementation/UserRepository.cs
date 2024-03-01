@@ -32,7 +32,8 @@ namespace LoginAppAPI.Repositories.Implementation
             if (u == null)
                 return false;
 
-            context.Remove(u);
+            context.Users.Remove(u);
+            context.SaveChanges();
             return true;
         }
 
