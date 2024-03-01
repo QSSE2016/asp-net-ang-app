@@ -38,7 +38,7 @@ namespace LoginAppAPI.Controllers
             User? response = await repo.CreateAsync(u);
 
             // 3. turn it back to a DTO (this time containing only the info we want). In my case i only want the name, so i'm passing the name only without a DTO
-            return Ok(response == null ? null : payload.Name);
+            return response == null ? StatusCode(409,new { message = "Can't create duplicate account" }) : Ok(new { username = payload.Name });
         }
 
 
@@ -48,7 +48,7 @@ namespace LoginAppAPI.Controllers
             try
             {
                 var usernames = repo.GetAllUsers();
-                return Ok(usernames);
+                return Ok(usernames.ToArray());
             } catch(Exception ex)
             {
                 System.Console.WriteLine("OOPS: " + ex.Message);

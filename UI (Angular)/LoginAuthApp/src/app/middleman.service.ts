@@ -21,7 +21,15 @@ export class MiddlemanService {
   }
 
   addUser(username:string,email:string,password:string) {
-    console.log("creating a new user with email: " + email)
+    return this.http.post(this.apiUrl + "users", {
+      name:username,
+      email:email,
+      password:password
+    })
+  }
+
+  getAllUsers() : Observable<any> {
+    return this.http.get(this.apiUrl + "users")
   }
 
   deleteUser(username:string) {

@@ -1,8 +1,8 @@
 <div class="full-scr-wrapper">
     <div class="section" id="SHOW_USERS">
         <button class="action-button"> Show Users </button>
-        <div class="list-wrapper">
-            <span *ngFor="let user of users">{{user}}</span>
+        <div class="list-wrapper" *ngIf="showUsers">
+            <span *ngFor="let user of users | async">{{user}}</span>
         </div>
     </div>
 
@@ -18,7 +18,7 @@
     <div class="section">
         <button class="action-button"> Show Users </button>
         <div class="list-wrapper">
-            <span *ngFor="let user of users">{{user}}</span>
+            <span *ngFor="let user of users | async">{{user}}</span>
         </div>
     </div>
 </div>

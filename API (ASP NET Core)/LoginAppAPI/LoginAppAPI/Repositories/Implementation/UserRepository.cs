@@ -16,7 +16,7 @@ namespace LoginAppAPI.Repositories.Implementation
         // I'm going to assume different names for every user, but if you want to take that into account, maybe don't use only the username for checking if someone is you lol.
         public async Task<User?> CreateAsync(User user)
         {
-            if(context.Users.Contains(user))
+            if(context.Users.Any(u => u.Name == user.Name && u.Password == user.Password))
                 return null;
 
             await context.AddAsync(user);
