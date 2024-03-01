@@ -7,5 +7,6 @@ namespace LoginAppAPI.Repositories.Interface
     {
         Task<User?> CreateAsync(User user);
         IEnumerable<string> GetAllUsers();
+        bool Delete(string userToDelete); 
     }
 }

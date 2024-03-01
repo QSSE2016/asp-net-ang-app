@@ -25,6 +25,17 @@ namespace LoginAppAPI.Repositories.Implementation
             return user;
         }
 
+        // Again you probably want async here. As in definetely. Best practises and such.
+        public bool Delete(string userToDelete)
+        {
+            User? u = context.Users.FirstOrDefault(user => user.Name == userToDelete);
+            if (u == null)
+                return false;
+
+            context.Remove(u);
+            return true;
+        }
+
         // Not making this async, since i have very little users. Though in serious projects
         // you probably want async functions
         public IEnumerable<string> GetAllUsers()

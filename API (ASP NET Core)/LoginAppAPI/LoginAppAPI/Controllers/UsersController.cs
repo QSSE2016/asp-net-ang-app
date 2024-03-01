@@ -55,5 +55,12 @@ namespace LoginAppAPI.Controllers
                 return StatusCode(500, "Something happened to the server.");
             }
         }
+
+        [HttpDelete]
+        public IActionResult DeleteUser(string username)
+        {
+            bool somethingGotDeleted = repo.Delete(username);
+            return somethingGotDeleted ? Ok() : StatusCode(404);
+        }
     }
 }
